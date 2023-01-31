@@ -1,0 +1,62 @@
+//Author: Chandana Kashyap
+//email ID: chanda1997@gmail.com
+//Description: A tree that randomly changes orientation of branches and leaves upon every refresh
+
+function setup() {
+  createCanvas(windowWidth, windowHeight);
+  angleMode(DEGREES) 
+  noLoop();
+}
+
+function draw() {
+  //set the background
+  background("lightblue");
+  translate(windowWidth/2 , windowHeight/2 +300);
+  branch(100);
+  
+}
+
+function branch(leng){
+  //draw the branches and trunk
+  push();
+  if(leng>10) {
+  stroke(70,40,20);
+  strokeWeight(map(leng,10,100,1,15))
+  line(0,0,0,-leng);
+  translate(0,-leng);
+  rotate((random(-20,-30)));
+  branch(leng * random(0.7,0.9))
+  rotate((random(50,40)));
+  branch(leng * random(0.7,0.9))
+  }
+  else{
+    // draw the leaves
+    var a = 130 + random(-20, 20)
+    var b = 20 + random(-20, 20)
+    var c = -10 + random(-20,20)
+    fill(a, b, c, 150)
+    noStroke();
+    ellipse(0,0,10);
+    
+    beginShape()
+    //make leaves shape more defined
+     for(var d = 45; d < 135; d++ ){
+      var rad1 = 15;
+      var e = rad1 * cos(d)
+      var f = rad1 * sin(d)
+      vertex(e,f)
+    }
+      //make leaves shape more defined
+      for(var d = 135; d > 40; d-- ){
+      var rad1 = 15;
+      var e = rad1 * cos(d)
+      var f = rad1 * sin(-d) + 20
+      vertex(e,f)
+      }
+    endShape(CLOSE)
+   
+  }
+pop();
+  
+  
+}
